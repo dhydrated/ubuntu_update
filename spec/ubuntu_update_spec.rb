@@ -14,3 +14,15 @@ describe UbuntuUpdate::Updater, "#upgrade" do
 		expect(updater.upgrade).to eq("sudo apt-get upgrade")
 	end
 end
+
+describe UbuntuUpdate::Updater, "#execute" do
+	it "it should run apt-get update when passed in {:update=>true}" do
+		updater = UbuntuUpdate::Updater.new ({:update=>true})
+		expect(updater.get_command).to eq("sudo apt-get update")
+	end
+
+	it "it should run apt-get update when passed in {:upgrade=>true}" do
+		updater = UbuntuUpdate::Updater.new ({:upgrade=>true})
+		expect(updater.get_command).to eq("sudo apt-get upgrade")
+	end
+end

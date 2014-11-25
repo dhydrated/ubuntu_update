@@ -15,8 +15,12 @@ module UbuntuUpdate
 		    @options[:verbose] = v
 		  end
 
-		  opts.on("-a", "--all", "Everything") do |a|
-		   
+		  opts.on("-p", "--update", "Run apt-get update") do |p|
+		    @options[:update] = p
+		  end
+
+		  opts.on("-g", "--upgrade", "Run apt-get update") do |g|
+		    @options[:upgrade] = g
 		  end
 		end
 
