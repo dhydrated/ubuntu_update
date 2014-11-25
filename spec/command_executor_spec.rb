@@ -1,9 +1,9 @@
 require 'spec_helper'
-require 'ubuntu_update/command_executor'
+require 'ubuntu_update/options_parser'
 
-describe UbuntuUpdate::CommandExecutor, "#get_summary" do
+describe UbuntuUpdate::OptionsParser, "#get_summary" do
 	it "it should print out usage syntax" do
-		executor = UbuntuUpdate::CommandExecutor.new		
+		executor = UbuntuUpdate::OptionsParser.new		
 		executor.parse([])
 		expect(executor.get_summary).to include("Usage: ubuntu_upgrade.rb [options]")
 		expect(executor.get_summary).to include("-v, --[no-]verbose")
@@ -11,7 +11,7 @@ describe UbuntuUpdate::CommandExecutor, "#get_summary" do
 	end
 
 	it "it should contains :verbose when passed -v in the argument" do
-		executor = UbuntuUpdate::CommandExecutor.new
+		executor = UbuntuUpdate::OptionsParser.new
 		executor.parse(["-v"])
 		expect(executor.get_options).to include(:verbose)
 	end

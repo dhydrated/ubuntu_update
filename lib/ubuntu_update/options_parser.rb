@@ -1,7 +1,7 @@
 require 'optparse'
 
 module UbuntuUpdate
-  class CommandExecutor
+  class OptionsParser
 
 
   	def parse arguments
