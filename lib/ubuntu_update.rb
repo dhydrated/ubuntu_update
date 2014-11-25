@@ -30,7 +30,15 @@ module UbuntuUpdate
     end
 
     def upgrade
-      resolve_command(:upgrade)
+   	  upgrade_command = "upgrade%{confirm}"
+
+   	  if @options[:yes]
+   	  	confirm = " -y"
+   	  else
+   	  	confirm = ""
+   	  end
+   	  upgrade_command = upgrade_command % {:confirm => confirm} 
+      resolve_command(upgrade_command)
     end
 
     private
