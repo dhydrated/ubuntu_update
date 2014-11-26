@@ -16,6 +16,12 @@ describe UbuntuUpdate::Updater, "#upgrade" do
 end
 
 describe UbuntuUpdate::Updater, "#execute" do
+
+	it "it should run apt-get update when no argument passed in" do
+		updater = UbuntuUpdate::Updater.new ({})
+		expect(updater.get_command).to eq("sudo apt-get update")
+	end
+
 	it "it should run apt-get update when passed in {:update=>true}" do
 		updater = UbuntuUpdate::Updater.new ({:update=>true})
 		expect(updater.get_command).to eq("sudo apt-get update")
