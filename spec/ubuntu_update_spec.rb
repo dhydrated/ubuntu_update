@@ -4,7 +4,19 @@ require 'ubuntu_update/options_parser'
 require 'ubuntu_update/command_executor'
 
 
-describe UbuntuUpdate::Updater, "#execute" do
+describe UbuntuUpdate::Updater, "#execute_command" do
+
+	it "it should show summary when --help is passed in" do
+		options_parser = UbuntuUpdate::OptionsParser.new
+		options_parser.expects(:get_options).at_least(1).returns({:help => true})
+		options_parser.expects(:get_summary).at_least(1).returns("My script summary")
+
+		command_executor = UbuntuUpdate::CommandExecutor.new
+		command_executor.expects(:execute).with(includes("My script summary"))
+
+		updater = UbuntuUpdate::Updater.new options_parser, command_executor
+		updater.execute_command
+	end
 
 	it "it should run apt-get update when no argument passed in" do
 		options_parser = UbuntuUpdate::OptionsParser.new
