@@ -17,15 +17,11 @@ module UbuntuUpdate
   		if @options.has_key? (:update) or options_does_not_contains_any_command? 
   			@command_list.push(update)
   		end
-  		if @options[:upgrade]
+  		if @options.has_key? (:upgrade)
   			@command_list.push(upgrade)
   		end
 
   		@command_list * " && "
-  	end
-
-  	def options_has (key)
-  		@options.size > 0 && @options[key]
   	end
 
   	def options_does_not_contains_any_command?
