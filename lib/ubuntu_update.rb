@@ -8,7 +8,8 @@ module UbuntuUpdate
   	@@apt_get_command = "sudo apt-get %{command}"
   	@resolved_command
 
-  	def initialize (options_parser)
+  	def initialize (options_parser, command_executor)
+  		@command_executor = command_executor
   		@options_parser = options_parser
   		@command_list = []
   	end
@@ -26,7 +27,7 @@ module UbuntuUpdate
   	end
 
   	def execute_command
-  		exec get_command
+  		@command_executor.execute get_command
   	end
 
     private

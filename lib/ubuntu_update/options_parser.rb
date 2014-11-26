@@ -3,6 +3,9 @@ require 'optparse'
 module UbuntuUpdate
   class OptionsParser
 
+  	def initialize
+
+  	end
 
   	def parse arguments
   		@options = {}
