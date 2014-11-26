@@ -16,12 +16,17 @@ module UbuntuUpdate
 
   	def get_command
 
-  		if @options_parser.get_options.has_key? (:update) or options_does_not_contains_any_command? 
-  			@command_list.push(update)
+  		if @options_parser.get_options.has_key? (:help)
+  			@command_list.push("echo '#{@options_parser.get_summary}'")
+  		else
+	  		if @options_parser.get_options.has_key? (:update) or options_does_not_contains_any_command? 
+	  			@command_list.push(update)
+	  		end
+	  		if @options_parser.get_options.has_key? (:upgrade)
+	  			@command_list.push(upgrade)
+	  		end
   		end
-  		if @options_parser.get_options.has_key? (:upgrade)
-  			@command_list.push(upgrade)
-  		end
+
 
   		@command_list * " && "
   	end

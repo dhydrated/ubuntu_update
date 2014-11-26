@@ -10,6 +10,7 @@ module UbuntuUpdate
   	def parse arguments
   		@options = {}
 
+
 		@option_parser = OptionParser.new do |opts|
 
 		  opts.banner = "Usage: ubuntu_upgrade.rb [options]"
@@ -27,8 +28,8 @@ module UbuntuUpdate
 		  end
 
 		  opts.on("-h", "--help", "Show usage summary") do |h|
-		    puts opts.help
-		    exit
+		    @options[:help] = h
+		    @summary = opts.help
 		  end
 		end
 
@@ -38,7 +39,7 @@ module UbuntuUpdate
   	end
 
   	def get_summary
-  		@option_parser.help()
+  		@summary
   	end
 
   	def get_engine

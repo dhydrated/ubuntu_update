@@ -1,11 +1,14 @@
 #!/usr/bin/env ruby
 require 'ubuntu_update'
 require 'ubuntu_update/options_parser'
+require 'ubuntu_update/command_executor'
 
 options_parser = UbuntuUpdate::OptionsParser.new		
 options_parser.parse(ARGV)
 
-updater = UbuntuUpdate::Updater.new (options_parser)
+command_executor = UbuntuUpdate::CommandExecutor.new
+
+updater = UbuntuUpdate::Updater.new options_parser, command_executor
 updater.execute_command
 
 
