@@ -3,22 +3,25 @@ require "ubuntu_update/version"
 module UbuntuUpdate
   class Updater
 
-  	command = ""
+  	@command_list
   	@@apt_get_command = "sudo apt-get %{command}"
+  	@resolved_command
 
   	def initialize (options={})
   		@options = options
+  		@command_list = []
   	end
 
   	def get_command
 
   		if @options[:update]
-  			output = update
-  		elsif @options[:upgrade]
-  			output = upgrade
+  			@command_list.push(update)
+  		end
+  		if @options[:upgrade]
+  			@command_list.push(upgrade)
   		end
 
-  		output
+  		@command_list * " && "
   	end
 
   	def execute_command

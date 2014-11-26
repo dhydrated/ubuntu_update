@@ -30,4 +30,9 @@ describe UbuntuUpdate::Updater, "#execute" do
 		updater = UbuntuUpdate::Updater.new ({:yes=>true, :upgrade=>true})
 		expect(updater.get_command).to eq("sudo apt-get upgrade -y")
 	end
+
+	it "it should run apt-get upgrade and upgrade when passed in {:update=>true, :upgrade=>true}" do
+		updater = UbuntuUpdate::Updater.new ({:update=>true, :upgrade=>true})
+		expect(updater.get_command).to eq("sudo apt-get update && sudo apt-get upgrade")
+	end
 end
