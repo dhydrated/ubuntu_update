@@ -25,14 +25,14 @@ module UbuntuUpdate
   		@command_list * " && "
   	end
 
+  	def execute_command
+  		exec get_command
+  	end
+
     private
 
   	def options_does_not_contains_any_command?
   		not [:update, :upgrade].any? {|k| @options_parser.get_options.key?(k)}
-  	end
-
-  	def execute_command
-  		exec get_command
   	end
 
     def update

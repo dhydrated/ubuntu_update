@@ -11,7 +11,7 @@ module UbuntuUpdate
 
 		  opts.banner = "Usage: ubuntu_upgrade.rb [options]"
 
-		  opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
+		  opts.on("-v", "--verbose", "Run verbosely") do |v|
 		    @options[:verbose] = v
 		  end
 
@@ -21,6 +21,11 @@ module UbuntuUpdate
 
 		  opts.on("-g", "--upgrade", "Run apt-get update") do |g|
 		    @options[:upgrade] = g
+		  end
+
+		  opts.on("-h", "--help", "Show usage summary") do |h|
+		    puts opts.help
+		    exit
 		  end
 		end
 
