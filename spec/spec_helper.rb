@@ -86,4 +86,6 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+  #Added mocha integration for mocking
+  config.mock_framework = :mocha
 end

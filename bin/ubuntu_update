@@ -5,7 +5,7 @@ require 'ubuntu_update/options_parser'
 options_parser = UbuntuUpdate::OptionsParser.new		
 options_parser.parse(ARGV)
 
-updater = UbuntuUpdate::Updater.new (options_parser.get_options)
-puts updater.execute_command
+updater = UbuntuUpdate::Updater.new (options_parser)
+updater.execute_command
 
 
