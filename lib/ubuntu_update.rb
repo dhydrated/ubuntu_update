@@ -14,38 +14,50 @@ module UbuntuUpdate
   		@command_list = []
   	end
 
-  	def get_command
-
-  		if @options_parser.get_options.has_key? (:help)
-  			@command_list.push("echo '#{@options_parser.get_summary}'")
-  		else
-	  		if @options_parser.get_options.has_key? (:update) or options_does_not_contains_any_command? 
-	  			@command_list.push(update)
-	  		end
-	  		if @options_parser.get_options.has_key? (:upgrade)
-	  			@command_list.push(upgrade)
-	  		end
-  		end
-
-
-  		@command_list * " && "
-  	end
-
   	def execute_command
   		@command_executor.execute get_command
   	end
 
     private
 
+    def get_command
+
+  		build_commands
+
+  		join_commands
+  	end
+
+  	def join_commands
+  		@command_list * " && "
+  	end
+
+    def build_commands
+    	if @options_parser.get_options.has_key? (:help)
+  			@command_list.push(get_print_summary)
+  		else
+	  		if @options_parser.get_options.has_key? (:update) or 
+	  		options_does_not_contains_any_command? 
+	  			@command_list.push(get_update)
+	  		end
+	  		if @options_parser.get_options.has_key? (:upgrade)
+	  			@command_list.push(get_upgrade)
+	  		end
+  		end
+  	end
+
   	def options_does_not_contains_any_command?
   		not [:update, :upgrade].any? {|k| @options_parser.get_options.key?(k)}
   	end
 
-    def update
+  	def get_print_summary
+  		"echo '#{@options_parser.get_summary}'"
+  	end
+
+    def get_update
       resolve_command(:update)
     end
 
-    def upgrade
+    def get_upgrade
    	  upgrade_command = "upgrade%{confirm}"
 
    	  if @options_parser.get_options[:yes]
