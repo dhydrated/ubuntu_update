@@ -5,6 +5,7 @@ module UbuntuUpdate
 
   	@options_parser
   	@command_list
+  	@@print_summary_command = "echo '%{summary}'"
   	@@apt_get_command = "sudo apt-get %{command}"
   	@resolved_command
 
@@ -50,7 +51,7 @@ module UbuntuUpdate
   	end
 
   	def get_print_summary
-  		"echo '#{@options_parser.get_summary}'"
+  		@@print_summary_command % {:summary => @options_parser.get_summary}
   	end
 
     def get_update
