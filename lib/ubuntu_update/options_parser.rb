@@ -27,6 +27,10 @@ module UbuntuUpdate
 		    @options[:upgrade] = g
 		  end
 
+		  opts.on("-y", "--yes", "Silent confirmation") do |y|
+		    @options[:yes] = y
+		  end
+
 		  opts.on("-h", "--help", "Show usage summary") do |h|
 		    @options[:help] = h
 		    @summary = opts.help
